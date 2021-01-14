@@ -28,22 +28,33 @@ module.exports = {
             return res.status(500).json(user);
         }
     },
-    async detals(req, res) {
+    async details(req, res) {
         const { _id } = req.params;
         const user = await Aluno.findOne({ _id });
         res.json(user);
     },
     async delete(req, res) {
-        const { _ìd } = req.params;
-        const user = await Aluno.findByIdAndDelete({ _id });
+        const { _id } = req.params;
+        const user = await Aluno.findByIdAndDelete({_id});
         return res.json(user);
     },
     async update(req, res) {
-        const { _id, nome_aluno, matricula_aluno, senha_aluno, idade_aluno, endereco_aluno, telefone_aluno }=req.body;
-        const data = { nome_aluno, matricula_aluno, senha_aluno, idade_aluno, endereco_aluno, telefone_aluno };
-        const user = await Aluno.findOneAndUpdate({ _id }, data, { new: true });
+        const { _id, nome_aluno,
+            matricula_aluno,
+            senha_aluno,
+            idade_aluno,
+            endereco_aluno,
+            telefone_aluno } = req.body;
+        const data = { nome_aluno,
+            matricula_aluno,
+            senha_aluno,
+            idade_aluno,
+            endereco_aluno,
+            telefone_aluno };
+        const user = await Aluno.findOneAndUpdate({_id},data,{new:true});
         res.json(user);
     },
+   
     async login(req, res) {
         const { matricula, senha } = req.body;
         Usuario.findOne({ matricula_aluno: matricula }, function (err, user) {
